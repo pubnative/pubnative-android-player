@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:id="@+id/btn_load"
+        android:text="Load"
+        android:onClick="onLoadClick"
+        android:gravity="center"/>
+
+    <net.pubnative.player.VASTPlayer
+        android:id="@+id/pubnative_vast_player"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@id/btn_load" />
+
+</RelativeLayout>
