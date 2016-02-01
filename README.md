@@ -47,7 +47,7 @@ new VASTParser(Context).setListener(new VASTParser.Listener() {
 
             @Override
             public void onVASTParserError(int error) {
-                
+
                 Log.e("VASTParser", "onVASTParserError: " + error);
             }
 
@@ -56,7 +56,7 @@ new VASTParser(Context).setListener(new VASTParser.Listener() {
 
                 // Use your model
             }
-            
+
         }).execute(VAST);
 ```
 
@@ -96,7 +96,7 @@ There are no described dependencies
 <a name="misc_license"></a>
 ### License
 
-This code is distributed under the terms and conditions of the MIT license.
+This code is distributed under the terms and conditions of the [BSD-3](LICENSE) license
 
 <a name="misc_contributing"></a>
 ### Contributing
