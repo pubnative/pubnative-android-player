@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2016, PubNative, Inc.
+// Copyright (c) 2016, PubNative, Nexage Inc.
 // All rights reserved.
 // Provided under BSD-3 license as follows:
 //
