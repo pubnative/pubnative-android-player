@@ -8,7 +8,6 @@ test:
     - ./gradlew clean test
   post:
     - ./gradlew cobertura coveralls
-    - ./gradlew createJar
 
 deployment:
   production:
