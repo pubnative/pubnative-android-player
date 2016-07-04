@@ -1,0 +1,17 @@
+machine:
+  timezone: Europe/Berlin
+
+test:
+  pre:
+    - ./gradlew projectInfo
+  override:
+    - ./gradlew clean test
+  post:
+    - ./gradlew cobertura coveralls
+
+deployment:
+  production:
+    branch: master
+    commands:
+      # Publish to BINTRAY
+      - ./gradlew bintrayUpload
