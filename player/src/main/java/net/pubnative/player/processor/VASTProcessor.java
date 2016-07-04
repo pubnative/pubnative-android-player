@@ -53,7 +53,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 /**
  * This class is responsible for taking a VAST 2.0 XML file, parsing it,
  * validating it, and creating a valid VASTModel object corresponding to it.
- * <p/>
+ * 
  * It can handle "regular" VAST XML files as well as VAST wrapper files.
  */
 public final class VASTProcessor {
