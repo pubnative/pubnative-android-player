@@ -5,7 +5,7 @@ test:
   pre:
     - ./gradlew projectInfo
   override:
-    - ./gradlew clean test
+    - ./gradlew clean test -p player
   post:
     - ./gradlew cobertura coveralls
 
