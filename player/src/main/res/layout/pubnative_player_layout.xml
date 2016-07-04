@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/player_banner_image"
-            android:scaleType="centerCrop"/>
+            android:src="@drawable/play"
+            android:scaleType="centerInside"/>
     </RelativeLayout>
 
     <RelativeLayout
