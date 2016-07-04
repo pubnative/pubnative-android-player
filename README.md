@@ -2,6 +2,9 @@
 
 #pubnative-android-player
 
+
+[![CircleCI](https://circleci.com/gh/pubnative/pubnative-android-player.svg?style=shield)](https://circleci.com/gh/pubnative/pubnative-android-player) [![Coverage Status](https://coveralls.io/repos/github/pubnative/pubnative-android-player/badge.svg)](https://coveralls.io/github/pubnative/pubnative-android-player?branch=master)
+
 pubnative-android-player is an open source IAB VAST 2.0 compilant player for Android player based on Nexage's [sourcekit-vast-player](https://github.com/nexage/sourcekit-vast-android).
 
 ##Contents
