@@ -86,11 +86,11 @@ public class DefaultMediaPicker implements VASTMediaPicker {
 	/*
 	 * This method filters the list of mediafiles and return the count.
 	 * Validate that the media file objects contain the required attributes for the Default Media Picker processing.
-	 *
+	 * 
 	 * 		Required attributes:
 	 * 			1. type
 	 * 			2. height
-	 * 			3. width
+	 * 			3. width 
 	 * 			4. url
 	 */
 
@@ -101,66 +101,18 @@ public class DefaultMediaPicker implements VASTMediaPicker {
         while (iter.hasNext()) {
 
             VASTMediaFile mediaFile = iter.next();
-
             // type attribute
-            String type = mediaFile.getType();
-
-            if (TextUtils.isEmpty(type)) {
+            if (TextUtils.isEmpty(mediaFile.getType())) {
                 VASTLog.d(TAG, "Validator error: mediaFile type empty");
                 iter.remove();
                 continue;
             }
 
-            // Height attribute
-            BigInteger height = mediaFile.getHeight();
-
-            if (null == height) {
-
-                VASTLog.d(TAG, "Validator error: mediaFile height null");
-                iter.remove();
-                continue;
-
-            } else {
-
-                int videoHeight = height.intValue();
-
-                if (!(0 < videoHeight && videoHeight < maxPixels)) {
-
-                    VASTLog.d(TAG, "Validator error: mediaFile height invalid: " + videoHeight);
-                    iter.remove();
-                    continue;
-                }
-            }
-
-            // width attribute
-            BigInteger width = mediaFile.getWidth();
-
-            if (null == width) {
-
-                VASTLog.d(TAG, "Validator error: mediaFile width null");
-                iter.remove();
-                continue;
-
-            } else {
-
-                int videoWidth = width.intValue();
-
-                if (!(0 < videoWidth && videoWidth < maxPixels)) {
-
-                    VASTLog.d(TAG, "Validator error: mediaFile width invalid: " + videoWidth);
-                    iter.remove();
-                    continue;
-                }
-            }
-
             // mediaFile url
-            String url = mediaFile.getValue();
-
-            if (TextUtils.isEmpty(url)) {
+            if (TextUtils.isEmpty(mediaFile.getValue())) {
 
                 VASTLog.d(TAG, "Validator error: mediaFile url empty");
                 iter.remove();
-                continue;
             }
         }
 
