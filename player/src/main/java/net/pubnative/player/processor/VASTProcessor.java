@@ -33,7 +33,7 @@ package net.pubnative.player.processor;
 
 import net.pubnative.player.VASTParser;
 import net.pubnative.player.model.VASTModel;
-import net.pubnative.player.processor.model.VAST_DOC_ELEMENTS;
+import net.pubnative.player.model.VAST_DOC_ELEMENTS;
 import net.pubnative.player.util.VASTLog;
 import net.pubnative.player.util.XmlTools;
 
@@ -96,8 +96,7 @@ public final class VASTProcessor {
 
         try {
             is.close();
-        } catch (IOException e) {
-        }
+        } catch (IOException e) { }
 
         if (error != VASTParser.ERROR_NONE) {
 

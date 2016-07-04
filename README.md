@@ -31,12 +31,14 @@ pubnative-android-player is an open source IAB VAST 2.0 compilant player for And
 <a name="install_gradle"></a>
 ### Gradle
 
-Coming soon...
+```
+compile 'net.pubnative:player:1.0.1'
+```
 
 <a name="install_manual"></a>
 ### Manual
 
-Clone the repository and import the `:player` module
+Clone the repository and import the `:player` module into your project
 
 <a name="usage"></a>
 # Usage
