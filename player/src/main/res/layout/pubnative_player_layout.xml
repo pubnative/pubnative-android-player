@@ -16,6 +16,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/player_banner_image"
+            android:scaleType="centerInside"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/player_replay_image"
             android:src="@drawable/play"
             android:scaleType="centerInside"/>
     </RelativeLayout>
@@ -61,15 +67,6 @@
                 android:layout_margin="5dp"
                 android:id="@+id/player_view_layout_mute"
                 android:src="@drawable/pubnative_btn_mute"/>
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_margin="5dp"
-                android:id="@+id/player_view_layout_learn_more"
-                android:src="@drawable/pubnative_btn_learn_more"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -135,5 +132,14 @@
             android:layout_centerInParent="true"
             android:background="@drawable/pubnative_rounded_shape_gray"/>
     </RelativeLayout>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="5dp"
+        android:id="@+id/player_view_layout_learn_more"
+        android:src="@drawable/pubnative_btn_learn_more"/>
 
 </RelativeLayout>
