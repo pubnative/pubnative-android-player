@@ -182,7 +182,7 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
                 result = (mPlayerState == PlayerState.Loader || mPlayerState == PlayerState.Banner);
                 break;
             case Player:
-                result = (mPlayerState == PlayerState.Ready);
+                result = (mPlayerState == PlayerState.Ready || mPlayerState == PlayerState.Banner);
                 break;
             case Banner:
                 result = (mPlayerState == PlayerState.Player);
@@ -408,6 +408,14 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
         setState(PlayerState.None);
     }
 
+    public void reset() {
+
+        VASTLog.v(TAG, "reset");
+        setState(PlayerState.Banner);
+        mMediaPlayer.pause();
+        mMediaPlayer.seekTo(0);
+    }
+
     /**
      * sets the banner that would be displayed after video
      * @param bitmap valid bitmap
@@ -548,7 +556,7 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
         mPlayerViewLayoutCountDown = (CountDownView) mPlayerViewLayout.findViewById(R.id.player_view_layout_count_down);
         mPlayerViewLayoutSkip = (TextView) mPlayerViewLayout.findViewById(R.id.player_view_layout_skip);
         mPlayerViewLayoutMute = (ImageView) mPlayerViewLayout.findViewById(R.id.player_view_layout_mute);
-        mPlayerViewLayoutLearnMore = (ImageView) mPlayerViewLayout.findViewById(R.id.player_view_layout_learn_more);
+        mPlayerViewLayoutLearnMore = (ImageView) mPlayerRoot.findViewById(R.id.player_view_layout_learn_more);
 
         mPlayerLoader = (RelativeLayout) mPlayerRoot.findViewById(R.id.player_loader);
 
