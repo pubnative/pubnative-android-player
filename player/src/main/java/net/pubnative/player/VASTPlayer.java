@@ -453,7 +453,7 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
 
         VASTLog.v(TAG, "stop");
 
-        if (canSetState(PlayerState.Loading)) {
+        if (canSetState(PlayerState.Loading) && mIsDataSourceSet) {
 
             stopTimers();
             if(mMediaPlayer != null) {
