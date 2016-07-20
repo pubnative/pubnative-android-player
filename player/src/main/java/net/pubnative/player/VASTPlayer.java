@@ -44,7 +44,6 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.ImageView;
@@ -153,18 +152,17 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
     private View          mBannerOpen;
 
     // OTHERS
-    private Bitmap        mBannerBitmap      = null;
-    private Handler       mMainHandler       = null;
-    private boolean       mIsSurfaceReady    = false;
-    private int           mVideoHeight       = 0;
-    private int           mVideoWidth        = 0;
-    private boolean       mIsVideoMute       = false;
-    private boolean       mIsCachingRequired = false;
-    private boolean       mIsBufferingShown  = false;
-    private int           mQuartile          = 0;
-    private CampaignType  mCampaignType      = CampaignType.CPM;
-    private PlayerState   mPlayerState       = PlayerState.Empty;
-    private List<Integer> mProgressTracker   = null;
+    private Bitmap        mBannerBitmap     = null;
+    private Handler       mMainHandler      = null;
+    private int           mVideoHeight      = 0;
+    private int           mVideoWidth       = 0;
+    private boolean       mIsVideoMute      = false;
+    private boolean       mIsBufferingShown = false;
+    private boolean       mIsDataSourceSet  = false;
+    private int           mQuartile         = 0;
+    private CampaignType  mCampaignType     = CampaignType.CPM;
+    private PlayerState   mPlayerState      = PlayerState.Empty;
+    private List<Integer> mProgressTracker  = null;
 
     //=======================================================
     // State machine
@@ -183,7 +181,7 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
                 result = true;
                 break;
             case Ready:
-                result = (PlayerState.Loading == mPlayerState || PlayerState.Playing == mPlayerState);
+                result = (PlayerState.Loading == mPlayerState);
                 break;
             case Playing:
                 result = (mPlayerState == PlayerState.Ready);
@@ -248,7 +246,6 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
         mQuartile = 0;
         mTrackingEventMap = null;
         mProgressTracker = null;
-        mIsCachingRequired = false;
         mBannerBitmap = null;
     }
 
@@ -306,8 +303,6 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
          * Don't change the order of this, since starting the media player after te timers could
          * lead to an invalid mediaplayer required inside the timers.
          */
-        createMediaPlayer();
-
         mMediaPlayer.setDisplay(mSurface.getHolder());
         calculateAspectRatio();
         refreshVolume();
@@ -433,6 +428,7 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
         // Clean, assign, load
         setState(PlayerState.Empty);
         mVastModel = model;
+        mIsDataSourceSet = false;
         setState(PlayerState.Loading);
     }
 
@@ -457,11 +453,13 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
 
         VASTLog.v(TAG, "stop");
 
-        if (canSetState(PlayerState.Ready)) {
+        if (canSetState(PlayerState.Loading)) {
 
             stopTimers();
-            mMediaPlayer.stop();
-            setState(PlayerState.Ready);
+            if(mMediaPlayer != null) {
+                mMediaPlayer.stop();
+            }
+            setState(PlayerState.Loading);
         } else {
             VASTLog.e(TAG, "ERROR, player in wrong state: " + mPlayerState.name());
         }
@@ -765,8 +763,12 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
 
         try {
 
-            String videoURL = mVastModel.getPickedMediaFileURL();
-            mMediaPlayer.setDataSource(videoURL);
+            if(!mIsDataSourceSet) {
+                mIsDataSourceSet = true;
+                String videoURL = mVastModel.getPickedMediaFileURL();
+                mMediaPlayer.setDataSource(videoURL);
+            }
+
             mMediaPlayer.prepareAsync();
 
         } catch (Exception exception) {
