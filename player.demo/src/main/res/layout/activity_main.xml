@@ -7,16 +7,34 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
+        android:layout_margin="5dp"
         android:id="@+id/btn_load"
         android:text="Load"
+        android:layout_alignParentTop="true"
         android:onClick="onLoadClick"
         android:gravity="center"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:id="@+id/btn_play"
+        android:layout_below="@id/btn_load"
+        android:text="PLAY"
+        android:onClick="onPlayClick"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:id="@+id/btn_stop"
+        android:layout_below="@id/btn_play"
+        android:text="STOP"
+        android:onClick="onStopClick"/>
+
     <net.pubnative.player.VASTPlayer
-        android:id="@+id/pubnative_vast_player"
+        android:id="@+id/player"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_below="@id/btn_load" />
+        android:layout_below="@id/btn_stop"/>
 
 </RelativeLayout>
