@@ -16,7 +16,7 @@
             android:id="@+id/surface"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/black"/>
 
         <!--PLAYER COUNTDOWN-->
         <net.pubnative.player.widget.CountDownView
@@ -78,7 +78,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@id/banner"
         android:layout_margin="5dp"
-        android:src="@drawable/pubnative_btn_learn_more"/>
+        android:src="@drawable/pubnative_btn_learn_more"
+        android:visibility="gone"/>
 
     <!-- LOADER -->
     <RelativeLayout
