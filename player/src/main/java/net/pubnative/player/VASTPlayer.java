@@ -36,6 +36,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -340,7 +341,6 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
         hidePlay();
         hidePlayerLayout();
 
-        showOpen();
         showSurface();
         showLoader("");
 
@@ -381,7 +381,7 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
         showOpen();
         showSurface();
         showPlayerLayout();
-
+        mSurface.setBackgroundColor(Color.parseColor("#00000000"));
         /**
          * Don't change the order of this, since starting the media player after te timers could
          * lead to an invalid mediaplayer required inside the timers.
@@ -791,7 +791,7 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
 
     private void hideOpen() {
 
-        mOpen.setVisibility(VISIBLE);
+        mOpen.setVisibility(INVISIBLE);
     }
 
     private void showOpen() {
@@ -807,6 +807,7 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
     private void showSurface() {
 
         mSurface.setVisibility(VISIBLE);
+        mSurface.setBackgroundColor(Color.parseColor("#000000"));
     }
 
     private void hidePlayerLayout() {
