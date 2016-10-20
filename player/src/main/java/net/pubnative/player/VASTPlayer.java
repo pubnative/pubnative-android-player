@@ -633,7 +633,7 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
     public void onOpenClick() {
 
         VASTLog.v(TAG, "onOpenClick");
-        stop();
+        pause();
         openOffer();
     }
 
@@ -754,9 +754,11 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
 
     private void showLoader(String message) {
 
-        mLoader.setVisibility(VISIBLE);
-        mLoaderText.setText(message);
-        mLoaderText.setVisibility(TextUtils.isEmpty(message) ? GONE : VISIBLE);
+        if(mPlayerState != PlayerState.Pause) {
+            mLoader.setVisibility(VISIBLE);
+            mLoaderText.setText(message);
+            mLoaderText.setVisibility(TextUtils.isEmpty(message) ? GONE : VISIBLE);
+        }
     }
 
     private void hideLoader() {
