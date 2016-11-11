@@ -570,6 +570,8 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
             stopTimers();
             if(mMediaPlayer != null) {
                 mMediaPlayer.stop();
+                mMediaPlayer.reset();
+                mIsDataSourceSet = false;
             }
             setState(PlayerState.Loading);
         } else {
@@ -633,7 +635,7 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
     public void onOpenClick() {
 
         VASTLog.v(TAG, "onOpenClick");
-        pause();
+        load(mVastModel);
         openOffer();
     }
 
