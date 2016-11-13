@@ -381,7 +381,6 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
         showOpen();
         showSurface();
         showPlayerLayout();
-        mSurface.setBackgroundColor(Color.parseColor("#00000000"));
         /**
          * Don't change the order of this, since starting the media player after te timers could
          * lead to an invalid mediaplayer required inside the timers.
@@ -570,6 +569,8 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
             stopTimers();
             if(mMediaPlayer != null) {
                 mMediaPlayer.stop();
+                mMediaPlayer.reset();
+                mIsDataSourceSet = false;
             }
             setState(PlayerState.Loading);
         } else {
@@ -633,7 +634,7 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
     public void onOpenClick() {
 
         VASTLog.v(TAG, "onOpenClick");
-        pause();
+        load(mVastModel);
         openOffer();
     }
 
@@ -809,7 +810,6 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
     private void showSurface() {
 
         mSurface.setVisibility(VISIBLE);
-        mSurface.setBackgroundColor(Color.parseColor("#000000"));
     }
 
     private void hidePlayerLayout() {
