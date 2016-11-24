@@ -78,7 +78,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@id/banner"
         android:layout_margin="5dp"
-        android:src="@drawable/pubnative_btn_learn_more"/>
+        android:src="@drawable/pubnative_btn_learn_more"
+        android:visibility="gone"/>
 
     <!-- LOADER -->
     <RelativeLayout

@@ -36,6 +36,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -340,7 +341,6 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
         hidePlay();
         hidePlayerLayout();
 
-        showOpen();
         showSurface();
         showLoader("");
 
@@ -381,7 +381,6 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
         showOpen();
         showSurface();
         showPlayerLayout();
-
         /**
          * Don't change the order of this, since starting the media player after te timers could
          * lead to an invalid mediaplayer required inside the timers.
@@ -570,6 +569,8 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
             stopTimers();
             if(mMediaPlayer != null) {
                 mMediaPlayer.stop();
+                mMediaPlayer.reset();
+                mIsDataSourceSet = false;
             }
             setState(PlayerState.Loading);
         } else {
@@ -633,7 +634,7 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
     public void onOpenClick() {
 
         VASTLog.v(TAG, "onOpenClick");
-        stop();
+        load(mVastModel);
         openOffer();
     }
 
@@ -754,9 +755,11 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
 
     private void showLoader(String message) {
 
-        mLoader.setVisibility(VISIBLE);
-        mLoaderText.setText(message);
-        mLoaderText.setVisibility(TextUtils.isEmpty(message) ? GONE : VISIBLE);
+        if(mPlayerState != PlayerState.Pause) {
+            mLoader.setVisibility(VISIBLE);
+            mLoaderText.setText(message);
+            mLoaderText.setVisibility(TextUtils.isEmpty(message) ? GONE : VISIBLE);
+        }
     }
 
     private void hideLoader() {
@@ -791,7 +794,7 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
 
     private void hideOpen() {
 
-        mOpen.setVisibility(VISIBLE);
+        mOpen.setVisibility(INVISIBLE);
     }
 
     private void showOpen() {
