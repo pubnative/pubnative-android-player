@@ -166,6 +166,7 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
     private PlayerState   mPlayerState      = PlayerState.Empty;
     private List<Integer> mProgressTracker  = null;
     private double        mTargetAspect     = -1.0;
+    private boolean       mIsBannerSet      = false;
 
     public VASTPlayer(Context context) {
         super(context);
@@ -325,6 +326,11 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
         mTrackingEventMap = null;
         mProgressTracker = null;
         mBannerBitmap = null;
+        if (mIsBannerSet) {
+            mIsBannerSet = false;
+        } else {
+            mBannerBitmap = null;
+        }
     }
 
     private void setLoadingState() {
@@ -463,6 +469,7 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
         } else {
             mBanner.setImageBitmap(mBannerBitmap);
         }
+        mIsBannerSet = true;
     }
 
     /**
@@ -634,6 +641,9 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
     public void onOpenClick() {
 
         VASTLog.v(TAG, "onOpenClick");
+        if (mBannerBitmap != null) {
+            mIsBannerSet = true;
+        }
         load(mVastModel);
         openOffer();
     }
