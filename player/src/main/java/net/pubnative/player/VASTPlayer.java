@@ -325,7 +325,6 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
         mQuartile = 0;
         mTrackingEventMap = null;
         mProgressTracker = null;
-        mBannerBitmap = null;
         if (mIsBannerSet) {
             mIsBannerSet = false;
         } else {
