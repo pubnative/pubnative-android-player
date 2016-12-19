@@ -324,7 +324,6 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
         mQuartile = 0;
         mTrackingEventMap = null;
         mProgressTracker = null;
-        mBannerBitmap = null;
     }
 
     private void setLoadingState() {
@@ -529,6 +528,7 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
      * CachingListener.onVASTPlayerCachingFinish(), so you can start video reproduction.
      *
      * @param model model containing the parsed VAST XML
+     * @deprecated Please use load(VASTModel model, Bitmap banner) instead
      */
     public void load(VASTModel model) {
 
@@ -536,9 +536,24 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
 
         // Clean, assign, load
         setState(PlayerState.Empty);
-        mVastModel = model;
-        mIsDataSourceSet = false;
-        setState(PlayerState.Loading);
+        startLoading(model);
+    }
+
+    /**
+     * Sets banner and starts loading a video VASTModel in the player, it will notify when it's
+     * ready with CachingListener.onVASTPlayerCachingFinish(), so you can start video reproduction.
+     *
+     * @param model  model containing the parsed VAST XML.
+     * @param banner valid bitmap.
+     */
+    public void load(VASTModel model, Bitmap banner) {
+
+        VASTLog.v(TAG, "load");
+
+        // Clean, assign, load
+        setState(PlayerState.Empty);
+        setBanner(banner);
+        startLoading(model);
     }
 
     /**
@@ -634,7 +649,7 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
     public void onOpenClick() {
 
         VASTLog.v(TAG, "onOpenClick");
-        load(mVastModel);
+        load(mVastModel, mBannerBitmap);
         openOffer();
     }
 
@@ -956,6 +971,14 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
             invokeOnFail(exception);
             destroy();
         }
+    }
+
+    private void startLoading(VASTModel model) {
+
+        Log.v(TAG, "startLoading");
+        mVastModel = model;
+        mIsDataSourceSet = false;
+        setState(PlayerState.Loading);
     }
 
     // Event processing
