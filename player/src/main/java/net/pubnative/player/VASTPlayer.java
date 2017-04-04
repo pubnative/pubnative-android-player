@@ -149,12 +149,8 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
     private TextView      mSkip;
     private ImageView     mMute;
     private CountDownView mCountDown;
-    // Banner
-    private ImageView     mBanner;
-    private View          mPlay;
 
     // OTHERS
-    private Bitmap        mBannerBitmap     = null;
     private Handler       mMainHandler      = null;
     private int           mVideoHeight      = 0;
     private int           mVideoWidth       = 0;
@@ -307,10 +303,8 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
         // Visual aspect total empty
         hideSurface();
         hidePlayerLayout();
-        hidePlay();
         hideOpen();
         hideLoader();
-        hideBanner();
 
         /**
          * Do not change this order, since cleaning the media player before invalidating timers
@@ -324,7 +318,6 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
         mQuartile = 0;
         mTrackingEventMap = null;
         mProgressTracker = null;
-        mBannerBitmap = null;
     }
 
     private void setLoadingState() {
@@ -332,13 +325,6 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
         Log.v(TAG, "setLoadingState");
 
         // Show loader
-        if (isBannerReady()) {
-            showBanner();
-        } else {
-            hideBanner();
-        }
-
-        hidePlay();
         hidePlayerLayout();
 
         showSurface();
@@ -357,14 +343,7 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
 
         hideLoader();
         hidePlayerLayout();
-
-        if (isBannerReady()) {
-            showBanner();
-        } else {
-            hideBanner();
-        }
         showOpen();
-        showPlay();
         showSurface();
 
         turnVolumeOff();
@@ -374,10 +353,7 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
 
         Log.v(TAG, "setPlayingState");
 
-        hideBanner();
-        hidePlay();
         hideLoader();
-
         showOpen();
         showSurface();
         showPlayerLayout();
@@ -405,17 +381,9 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
         hideLoader();
         hidePlayerLayout();
 
-        if (isBannerReady()) {
-            showBanner();
-        } else {
-            hideBanner();
-        }
         showOpen();
-        showPlay();
         showSurface();
-
         turnVolumeOff();
-
         refreshVolume();
     }
 
@@ -448,21 +416,6 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
 
         Log.v(TAG, "setListener");
         mListener = listener;
-    }
-
-    /**
-     * sets the banner that would be displayed after video
-     *
-     * @param bitmap valid bitmap
-     */
-    public void setBanner(Bitmap bitmap) {
-
-        mBannerBitmap = bitmap;
-        if (mBannerBitmap == null) {
-            mBanner.setImageResource(0);
-        } else {
-            mBanner.setImageBitmap(mBannerBitmap);
-        }
     }
 
     /**
@@ -638,12 +591,6 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
         openOffer();
     }
 
-    protected void onPlayClick() {
-
-        VASTLog.v(TAG, "onPlayClick");
-        play();
-    }
-
     private void openOffer() {
 
         String clickThroughUrl = mVastModel.getVideoClicks().getClickThrough();
@@ -738,13 +685,6 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
             mLoaderText = (TextView) mRoot.findViewById(R.id.loader_text);
             mLoaderText.setVisibility(GONE);
 
-            mPlay = mRoot.findViewById(R.id.play);
-            mPlay.setVisibility(INVISIBLE);
-            mPlay.setOnClickListener(this);
-
-            mBanner = (ImageView) mRoot.findViewById(R.id.banner);
-            mBanner.setVisibility(INVISIBLE);
-
             mOpen = mRoot.findViewById(R.id.open);
             mOpen.setVisibility(INVISIBLE);
             mOpen.setOnClickListener(this);
@@ -765,31 +705,6 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
     private void hideLoader() {
 
         mLoader.setVisibility(INVISIBLE);
-    }
-
-    private boolean isBannerReady() {
-
-        return mBannerBitmap != null;
-    }
-
-    private void showBanner() {
-
-        mBanner.setVisibility(VISIBLE);
-    }
-
-    private void hideBanner() {
-
-        mBanner.setVisibility(INVISIBLE);
-    }
-
-    private void showPlay() {
-
-        mPlay.setVisibility(VISIBLE);
-    }
-
-    private void hidePlay() {
-
-        mPlay.setVisibility(INVISIBLE);
     }
 
     private void hideOpen() {
@@ -1386,11 +1301,7 @@ public class VASTPlayer extends RelativeLayout implements MediaPlayer.OnCompleti
 
         VASTLog.v(TAG, "onClick -- (View.OnClickListener callback)");
 
-        if (mPlay == view) {
-
-            onPlayClick();
-
-        } else if (mOpen == view) {
+        if (mOpen == view) {
 
             onOpenClick();
 
