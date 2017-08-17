@@ -64,6 +64,9 @@ public class HttpTools {
                         int code = conn.getResponseCode();
                         VASTLog.v(TAG, "response code:" + code + ", for URL:" + url);
 
+                        conn.getInputStream().close();
+                        conn.getOutputStream().close();
+
                     } catch (Exception e) {
 
                         VASTLog.w(TAG, url + ": " + e.getMessage() + ":" + e.toString());
