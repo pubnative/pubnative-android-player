@@ -33,6 +33,7 @@ package net.pubnative.player.util;
 
 import android.text.TextUtils;
 
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -68,14 +69,8 @@ public class HttpTools {
                         VASTLog.w(TAG, url + ": " + e.getMessage() + ":" + e.toString());
 
                     } finally {
-
                         if (conn != null) {
-
-                            try {
-
-                                conn.disconnect();
-
-                            } catch (Exception e) {}
+                            conn.disconnect();
                         }
                     }
 
