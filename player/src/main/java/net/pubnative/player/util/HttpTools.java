@@ -33,7 +33,6 @@ package net.pubnative.player.util;
 
 import android.text.TextUtils;
 
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -60,6 +59,7 @@ public class HttpTools {
                         conn.setConnectTimeout(5000);
                         conn.setRequestProperty("Connection", "close");
                         conn.setRequestMethod("GET");
+                        conn.connect();
 
                         int code = conn.getResponseCode();
                         VASTLog.v(TAG, "response code:" + code + ", for URL:" + url);
