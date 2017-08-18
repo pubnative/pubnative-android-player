@@ -59,23 +59,21 @@ public class HttpTools {
                         conn.setConnectTimeout(5000);
                         conn.setRequestProperty("Connection", "close");
                         conn.setRequestMethod("GET");
+                        conn.connect();
 
                         int code = conn.getResponseCode();
                         VASTLog.v(TAG, "response code:" + code + ", for URL:" + url);
+
+                        conn.getInputStream().close();
+                        conn.getOutputStream().close();
 
                     } catch (Exception e) {
 
                         VASTLog.w(TAG, url + ": " + e.getMessage() + ":" + e.toString());
 
                     } finally {
-
                         if (conn != null) {
-
-                            try {
-
-                                conn.disconnect();
-
-                            } catch (Exception e) {}
+                            conn.disconnect();
                         }
                     }
 
