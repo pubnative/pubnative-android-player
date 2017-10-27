@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="progress_bar_max_height">20dp</dimen>
+    <dimen name="progress_bar_min_height">3dp</dimen>
+    <dimen name="time_view_margin">6dp</dimen>
+    <dimen name="text_size_12sp">12sp</dimen>
+    <dimen name="mute_view_size">40dp</dimen>
+    <dimen name="skip_view_size">40dp</dimen>
+    <dimen name="replay_view_size">40dp</dimen>
+    <dimen name="close_view_size">40dp</dimen>
+</resources>
